@@ -39,6 +39,9 @@ for NATS:
 | `nats-servers`              | optional | NATS cluster nodes separated by commas. e.g. `nats://127.0.0.1:4222,nats://127.0.0.1:4223`. Defaults to `localhost:4222`                    |
 | `nats-max-reconnect`        | optional | Maximum attempts that the driver will try to connect before giving up. Defaults to infinite (`-1`)                                          |
 | `nats-subject`              | optional | Specific subject to which logs will be published. Defaults to using `tag` if not specified                                                  |
+| `nats-user`                 | optional | Specify user in case of authentication required                                                                                             |
+| `nats-pass`                 | optional | Specify password in case of authentication required                                                                                         |
+| `nats-pass`                 | optional | Specify token in case of authentication required                                                                                            |
 | `nats-tls-ca-cert`          | optional | Specified the absolute path to the trust certificates signed by the CA                                                                      |
 | `nats-tls-cert`             | optional | Specifies the absolute path to the TLS certificate file                                                                                     |
 | `nats-tls-key`              | optional | Specifies the absolute path to the TLS key file                                                                                             |
@@ -62,8 +65,8 @@ subject in case subject it is left unspecified:
         --log-opt tag="docker.{{.ID}}.{{.ImageName}}" your/application
 ```
 
-Secure connection to NATS using TLS can be customized by setting the
-absolute paths to the certs and key files:
+Secure connection to NATS using TLS can be customized by setting `tls://` scheme
+in the URI and absolute paths to the certs and key files:
 
 ```
   docker run --log-driver nats \
